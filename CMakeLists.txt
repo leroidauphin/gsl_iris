@@ -18,6 +18,5 @@ if (TEST)
 	find_package(GTest REQUIRED)
 
 	add_subdirectory(${PROJECT_SOURCE_DIR}/test)
-
 endif (TEST)
 

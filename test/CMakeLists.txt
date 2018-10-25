@@ -5,4 +5,4 @@ target_link_libraries(run_unit_tests TestLayers)
 target_link_libraries(run_unit_tests ${GTEST_BOTH_LIBRARIES})
 target_link_libraries(run_unit_tests pthread)
 
-add_test(AllUnitTests run_unit_tests)
+add_test(NAME AllUnitTests COMMAND run_unit_tests)
