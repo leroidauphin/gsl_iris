@@ -1,3 +1,4 @@
-add_library(Layers layers.cpp layers.hpp)
+add_library(Layers layers.cpp)
 target_compile_features(Layers PUBLIC cxx_std_17)
+target_include_directories(Layers PUBLIC ${COMMON_INCLUDES})
 target_include_directories(Layers PUBLIC ${GSL_INCLUDE_DIRS})

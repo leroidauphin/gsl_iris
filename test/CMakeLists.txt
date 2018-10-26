@@ -1,4 +1,5 @@
 add_library(TestLayers test_layers.cpp)
+target_include_directories(TestLayers PUBLIC ${COMMON_INCLUDES})
 
 add_executable(run_unit_tests run_unit_tests.cpp)
 target_link_libraries(run_unit_tests TestLayers)
