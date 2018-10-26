@@ -15,6 +15,8 @@ class Initialiser {
 		Initialiser& operator=(const Initialiser&) = default;
 		Initialiser& operator=(Initialiser&&) = default;
 		virtual ~Initialiser() = default;
+
+		float get_value();
 };
 
 
