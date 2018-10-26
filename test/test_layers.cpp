@@ -1,4 +1,6 @@
 
+#include "gsl_layers.hpp"
+#include "initialiser.hpp"
 #include "layers.hpp"
 
 #include "gtest/gtest.h"
@@ -9,17 +11,14 @@ class ConstantInitialiser : public Initialiser {
 		ConstantInitialiser()
 		{}
 
-		float get_value();
+		double get_value() {
+			return 1.0;
+		}
 };
 
 
-float ConstantInitialiser::get_value() {
-	return 1.0;
-}
-
-
-TEST(constant_layer_test, test_constant_layer){
+TEST(constant_gsllayer_test, test_constant_gsllayer){
 	auto initialiser = ConstantInitialiser();
-	Layer layer = Layer::make_layer(1, 1, initialiser);
+	auto layer = GSLLayer::make_layer(1, 1, initialiser);
 	EXPECT_EQ(1, 0);
 }
