@@ -6,7 +6,9 @@
 
 class ConstantInitialiser : public Initialiser {
 	public:
-		ConstantInitialiser();
+		ConstantInitialiser()
+		{}
+
 		float get_value();
 };
 
@@ -17,7 +19,7 @@ float ConstantInitialiser::get_value() {
 
 
 TEST(constant_layer_test, test_constant_layer){
-	Initialiser initialiser = ConstantInitialiser();
+	auto initialiser = ConstantInitialiser();
 	Layer layer = Layer::make_layer(1, 1, initialiser);
 	EXPECT_EQ(1, 0);
 }

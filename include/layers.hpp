@@ -10,6 +10,7 @@
 
 class Initialiser {
 	public:
+		Initialiser() = default;
 		Initialiser(const Initialiser&) = default;
 		Initialiser(Initialiser&&) = default;
 		Initialiser& operator=(const Initialiser&) = default;
