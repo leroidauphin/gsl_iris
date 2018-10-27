@@ -5,9 +5,10 @@
 #include "variables.hpp"
 
 
+template<class T>
 class Layer {
 	public:
-		virtual Variables apply(Variables input) = 0;
+		virtual Variables<T> apply(Variables<T> input) = 0;
 };
 
 

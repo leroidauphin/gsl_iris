@@ -12,7 +12,7 @@ std::unique_ptr<GSLLayer> GSLLayer::make_layer(size_t n_nodes, size_t node_size,
 	return std::unique_ptr<GSLLayer>(new GSLLayer(matrix));
 }
 
-Variables GSLLayer::apply(Variables input) {
+Variables<gsl_vector> GSLLayer::apply(Variables<gsl_vector> input) {
 	return input;
 }
 
