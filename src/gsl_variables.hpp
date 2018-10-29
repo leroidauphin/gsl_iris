@@ -22,7 +22,7 @@ class Variables<gsl_vector> {
 		static std::unique_ptr<Variables<gsl_vector>> make_variables(size_t n_values, Initialiser& initialiser);
 
 		gsl_vector get_values();
-	protected:
+
 		Variables<gsl_vector>(gsl_vector* values): values(values)
 		{}
 };

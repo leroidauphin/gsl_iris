@@ -14,7 +14,6 @@ class Variables {
 
 		T get_values();
 
-	protected:
 		Variables(T* values): values(values)
 		{}
 };

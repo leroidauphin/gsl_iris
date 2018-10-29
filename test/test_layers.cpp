@@ -20,5 +20,5 @@ TEST(constant_gsllayer_test, test_constant_gsllayer){
 	auto output_values = output.get_values();
 	auto values = gsl_vector_get(&output_values, 0);
 
-	EXPECT_EQ(values, 0);
+	EXPECT_EQ(values, 6.0);
 }
