@@ -2,7 +2,6 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
-#include <gsl/gsl_vector.h>
 #include <memory>
 
 template <class T>
