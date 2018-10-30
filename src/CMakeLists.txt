@@ -3,3 +3,5 @@ target_compile_features(GSLLayers PUBLIC cxx_std_17)
 target_include_directories(GSLLayers PUBLIC ${COMMON_INCLUDES})
 target_include_directories(GSLLayers PUBLIC ${GSL_INCLUDE_DIRS})
 target_link_libraries(GSLLayers ${GSL_LIBRARIES})
+
+add_subdirectory(initialiser)
