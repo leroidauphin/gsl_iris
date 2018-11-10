@@ -20,8 +20,9 @@ class GSLLayer: public Layer<gsl_vector> {
 		Variables<gsl_vector> apply(Variables<gsl_vector> input);
 	private:
 		const std::unique_ptr<gsl_matrix> layer;
+		const std::unique_ptr<gsl_vector> bias;
 
-		GSLLayer(gsl_matrix* layer): layer(layer)
+		GSLLayer(gsl_matrix* layer, gsl_vector* bias): layer(layer), bias(bias)
 		{}
 };
 

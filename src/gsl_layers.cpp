@@ -11,7 +11,8 @@ std::unique_ptr<GSLLayer> GSLLayer::make_layer(size_t n_nodes, size_t node_size,
 			gsl_matrix_set(matrix, i, j, initialiser.get_value());
 		}
 	}
-	return std::unique_ptr<GSLLayer>(new GSLLayer(matrix));
+	auto vector(gsl_vector_calloc(n_nodes));
+	return std::unique_ptr<GSLLayer>(new GSLLayer(matrix, vector));
 }
 
 
