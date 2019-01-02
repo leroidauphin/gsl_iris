@@ -6,16 +6,10 @@
 
 template <class T>
 class Variables {
-	const std::unique_ptr<T> values;
-
 	public:
-		Variables(const Variables& other): values(std::unique_ptr<T>(other.values.get()))
-		{}
+		virtual ~Variables() = default;
 
 		T get_values();
-
-		Variables(T* values): values(values)
-		{}
 };
 
 

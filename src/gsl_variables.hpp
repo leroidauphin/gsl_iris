@@ -11,20 +11,20 @@
 #include <memory>
 
 template <>
-class Variables<gsl_vector> {
-	const std::unique_ptr<gsl_vector> values;
+class Variables<gsl_vector*> {
 
 	public:
-		Variables<gsl_vector>(const Variables<gsl_vector>& other): values(std::unique_ptr<gsl_vector>(other.values.get()))
+		Variables(const Variables<gsl_vector*>&) = default;
+		~Variables<gsl_vector*>();
+
+		static std::shared_ptr<Variables<gsl_vector*>> make_variables(size_t n_values, Initialiser& initialiser);
+
+		gsl_vector * get_values();
+
+		Variables(gsl_vector* values): values(values)
 		{}
-		~Variables<gsl_vector>();
-
-		static std::unique_ptr<Variables<gsl_vector>> make_variables(size_t n_values, Initialiser& initialiser);
-
-		gsl_vector get_values();
-
-		Variables<gsl_vector>(gsl_vector* values): values(values)
-		{}
+	private:
+		gsl_vector* values;
 };
 
 

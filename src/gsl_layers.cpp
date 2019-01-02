@@ -3,6 +3,7 @@
 #include "gsl_layers.hpp"
 
 #include "gsl/gsl_blas.h"
+#include <iostream>
 
 std::unique_ptr<GSLLayer> GSLLayer::make_layer(size_t n_nodes, size_t node_size, Initialiser& initialiser){
 	auto matrix(gsl_matrix_alloc(n_nodes, node_size));
@@ -17,14 +18,21 @@ std::unique_ptr<GSLLayer> GSLLayer::make_layer(size_t n_nodes, size_t node_size,
 
 
 GSLLayer::~GSLLayer() {
-	gsl_matrix_free(layer.get());
+	gsl_matrix_free(layer);
 }
 
 
-Variables<gsl_vector> GSLLayer::apply(Variables<gsl_vector> input) {
-	auto target_vector = gsl_vector_alloc(input.get_values().size);
-	auto input_values = input.get_values();
-	gsl_blas_dgemv(CblasNoTrans, 1.0, layer.get(), &input_values, 0.0, target_vector);
-	return Variables<gsl_vector>(target_vector);
+Variables<gsl_vector*> GSLLayer::apply(std::shared_ptr<Variables<gsl_vector*>> input) {
+	auto input_size = input->get_values()->size;
+	auto target_vector = gsl_vector_alloc(input_size);
+	auto input_values = input->get_values();
+	gsl_blas_dgemv(CblasNoTrans, 1.0, layer, input_values, 0.0, target_vector);
+
+	for (auto i = 0; i < input_size; i++) {
+		auto value = gsl_vector_get(target_vector, i);
+		gsl_vector_set(input_values, i, value);
+	}
+
+	return *input;
 }
 
