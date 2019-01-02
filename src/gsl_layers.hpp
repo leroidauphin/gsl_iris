@@ -17,7 +17,7 @@ class GSLLayer: public Layer<gsl_vector*> {
 
 		~GSLLayer();
 
-		Variables<gsl_vector*> apply(std::shared_ptr<Variables<gsl_vector*>> input);
+		void apply(std::shared_ptr<Variables<gsl_vector*>> input);
 	private:
 		gsl_matrix* layer;
 		gsl_vector* bias;

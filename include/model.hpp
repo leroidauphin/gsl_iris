@@ -13,12 +13,18 @@ class Model {
 		Model(std::list<std::shared_ptr<Layer<T>>> layers): layers(layers)
 		{}
 
-		Variables<T> apply(Variables<T> input) {
-			return input;
-		}
+		void apply(std::shared_ptr<Variables<T>> input);
 	private:
 		const std::list<std::shared_ptr<Layer<T>>> layers;
 };
+
+
+template<class T>
+void Model<T>::apply(std::shared_ptr<Variables<T>> input) {
+    for (const auto layer : layers) {
+        layer->apply(input);
+    }
+}
 
 
 #endif

@@ -19,6 +19,8 @@ class Variables<int> {
 
 		Variables(int values): values(values)
 		{}
+
+		~Variables<int>() = default;
 	private:
 		int values;
 };
@@ -29,17 +31,11 @@ TEST(test_model, test_no_layers){
 	std::list<std::shared_ptr<Layer<int>>> list;
 	Model<int> model(list);
 
-	std::cout << "Model construction" << std::endl;
-
 	auto variables_initialiser = 2;
-	auto variables = Variables<int>(variables_initialiser);
+	auto variable_ptr = std::make_shared<Variables<int>>(variables_initialiser);
 
-	std::cout << "Variables construction" << std::endl;
-
-	auto output = model.apply(variables);
-	auto output_values = output.get_values();
-
-	std::cout << "Output Values" << std::endl;
+	model.apply(variable_ptr);
+	auto output_values = variable_ptr->get_values();
 
 	ASSERT_EQ(output_values, 2.0);
 }

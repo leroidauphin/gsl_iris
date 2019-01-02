@@ -15,7 +15,7 @@ class Variables<gsl_vector*> {
 
 	public:
 		Variables(const Variables<gsl_vector*>&) = default;
-		~Variables<gsl_vector*>();
+		~Variables<gsl_vector*>() = default;
 
 		static std::shared_ptr<Variables<gsl_vector*>> make_variables(size_t n_values, Initialiser& initialiser);
 

@@ -22,17 +22,15 @@ GSLLayer::~GSLLayer() {
 }
 
 
-Variables<gsl_vector*> GSLLayer::apply(std::shared_ptr<Variables<gsl_vector*>> input) {
+void GSLLayer::apply(std::shared_ptr<Variables<gsl_vector*>> input) {
 	auto input_size = input->get_values()->size;
 	auto target_vector = gsl_vector_alloc(input_size);
 	auto input_values = input->get_values();
 	gsl_blas_dgemv(CblasNoTrans, 1.0, layer, input_values, 0.0, target_vector);
 
-	for (auto i = 0; i < input_size; i++) {
+	for (size_t i = 0; i < input_size; i++) {
 		auto value = gsl_vector_get(target_vector, i);
 		gsl_vector_set(input_values, i, value);
 	}
-
-	return *input;
 }
 
