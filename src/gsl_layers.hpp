@@ -9,11 +9,12 @@
 #include <gsl/gsl_vector.h>
 
 #include <cstddef>
+#include <functional>
 #include <memory>
 
 class GSLLayer: public Layer<gsl_vector*> {
 	public:
-		static std::unique_ptr<GSLLayer> make_layer(size_t n_nodes, size_t node_size, Initialiser& initialiser);
+		static std::unique_ptr<GSLLayer> make_layer(size_t n_nodes, size_t node_size, Initialiser& initialiser, std::function<double(double)> activation_fn);
 
 		~GSLLayer();
 
@@ -21,8 +22,9 @@ class GSLLayer: public Layer<gsl_vector*> {
 	private:
 		gsl_matrix* layer;
 		gsl_vector* bias;
+		std::function<double(double)> activation_fn;
 
-		GSLLayer(gsl_matrix* layer, gsl_vector* bias): layer(layer), bias(bias)
+		GSLLayer(gsl_matrix* layer, gsl_vector* bias, std::function<double(double)> activation): layer(layer), bias(bias), activation_fn(activation)
 		{}
 };
 
