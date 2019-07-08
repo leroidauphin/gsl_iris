@@ -15,7 +15,6 @@ std::unique_ptr<GaussianInitialiser> GaussianInitialiser::make_initialiser(){
 }
 
 GaussianInitialiser::~GaussianInitialiser(){
-	gsl_rng_free(random.get());
 }
 
 
