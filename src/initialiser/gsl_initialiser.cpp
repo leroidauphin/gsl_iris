@@ -1,5 +1,5 @@
 
-#include "initialiser.hpp"
+#include "gsl_initialiser.hpp"
 
 #include <gsl/gsl_randist.h>
 
