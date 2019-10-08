@@ -2,6 +2,7 @@ We are going to try and follow https://towardsdatascience.com/neural-network-on-
 
 This is probably not going to work at all...
 
-
-
-
+Ubuntu dependencies:
+cmake
+libgsl-dev
+libgtest-dev
