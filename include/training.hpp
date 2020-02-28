@@ -2,7 +2,16 @@
 #ifndef TRAINING_H
 #define TRAINING_H
 
+#include <model.hpp>
 #include "variables.hpp"
+
+
+template<class T>
+class Cost {
+    public:
+        virtual T compute_cost(std::shared_ptr<Variables<T>> input);
+};
+
 
 template<class T>
 class Trainer {
