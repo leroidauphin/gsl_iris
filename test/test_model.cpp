@@ -75,7 +75,7 @@ TEST(test_model, test_one_layer){
 }
 
 
-TEST(test_mode, test_two_layers){
+TEST(test_model, test_two_layers){
 	auto one_layer = std::make_shared<IntLayer>(3);
 	auto two_layer = std::make_shared<IntLayer>(5);
 	std::list<std::shared_ptr<Layer<int>>> list{one_layer, two_layer};
@@ -88,4 +88,12 @@ TEST(test_mode, test_two_layers){
 	auto output_values = variable_ptr->get_values();
 
 	ASSERT_EQ(output_values, 30.0);
+}
+
+
+TEST(test_model, test_train_model){
+	std::list<std::shared_ptr<Layer<int>>> list;
+    Model<int> model(list);
+
+	model.train();
 }

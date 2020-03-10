@@ -13,7 +13,9 @@ class Model {
 		Model(std::list<std::shared_ptr<Layer<T>>> layers): layers(layers)
 		{}
 
-		void apply(std::shared_ptr<Variables<T>> input);
+		virtual void apply(std::shared_ptr<Variables<T>> input);
+
+		virtual void train();
 	private:
 		const std::list<std::shared_ptr<Layer<T>>> layers;
 };
@@ -24,6 +26,12 @@ void Model<T>::apply(std::shared_ptr<Variables<T>> input) {
     for (const auto layer : layers) {
         layer->apply(input);
     }
+}
+
+
+template<class T>
+void Model<T>::train() {
+	
 }
 
 

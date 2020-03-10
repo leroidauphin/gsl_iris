@@ -6,8 +6,10 @@
 #include <gsl/gsl_vector.h>
 
 
-class GSLCost: public Cost<gsl_vector*> {
-    gsl_vector* compute_cost(std::shared_ptr<Variables<gsl_vector*>> input);
+class GSLCrossEntropyCost: public Cost<gsl_vector*> {
+    double compute_cost(
+        std::shared_ptr<Variables<gsl_vector*>> predictions,
+        std::shared_ptr<Variables<gsl_vector*>> targets);
 };
 
 
