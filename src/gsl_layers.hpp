@@ -4,6 +4,7 @@
 
 #include "initialiser.hpp"
 #include "layers.hpp"
+#include "gsl_variables.hpp"
 
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_vector.h>
@@ -14,7 +15,7 @@
 
 class GSLLayer: public Layer<gsl_vector*> {
 	public:
-		static std::unique_ptr<GSLLayer> make_layer(
+		static GSLLayer make_layer(
 			size_t n_nodes, 
 			size_t node_size, 
 			Initialiser& initialiser, 
@@ -23,7 +24,7 @@ class GSLLayer: public Layer<gsl_vector*> {
 
 		~GSLLayer();
 
-		void apply(std::shared_ptr<Variables<gsl_vector*>> input);
+		GSLVariables apply(GSLVariables input);
 	private:
 		gsl_matrix* layer;
 		gsl_vector* bias;

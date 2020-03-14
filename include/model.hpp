@@ -10,22 +10,32 @@
 template<class T>
 class Model {
 	public:
-		Model(std::list<std::shared_ptr<Layer<T>>> layers): layers(layers)
-		{}
+		Model<T> () {};
 
-		virtual void apply(std::shared_ptr<Variables<T>> input);
+		void add_layer(std::unique_ptr<Layer<T>> layer);
 
-		virtual void train();
+		Variables<T> apply(Variables<T> input);
+
+		void train();
 	private:
-		const std::list<std::shared_ptr<Layer<T>>> layers;
+		std::list<std::unique_ptr<Layer<T>>> layers;
 };
 
 
 template<class T>
-void Model<T>::apply(std::shared_ptr<Variables<T>> input) {
-    for (const auto layer : layers) {
-        layer->apply(input);
+void Model<T>::add_layer(std::unique_ptr<Layer<T>> layer) {
+	layers.push_back(std::move(layer));
+}
+
+
+template<class T>
+Variables<T> Model<T>::apply(Variables<T> input) {
+	Variables<T> output = input;
+    for (auto&& layer: layers) {
+        output = layer->apply(output);
     }
+
+	return output;
 }
 
 
