@@ -4,7 +4,6 @@
 
 #include "initialiser.hpp"
 #include "layers.hpp"
-#include "gsl_variables.hpp"
 
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_vector.h>
@@ -13,24 +12,25 @@
 #include <functional>
 #include <memory>
 
-class GSLLayer: public Layer<gsl_vector*> {
+template <>
+class Layer<gsl_vector*> {
 	public:
-		static GSLLayer make_layer(
+		static Layer<gsl_vector*> make_layer(
 			size_t n_nodes, 
 			size_t node_size, 
 			Initialiser& initialiser, 
 			std::function<double(double)> activation_fn
 		);
 
-		~GSLLayer();
+		~Layer<gsl_vector*>();
 
-		GSLVariables apply(GSLVariables input);
+		Variables<gsl_vector*> apply(Variables<gsl_vector*> input);
 	private:
 		gsl_matrix* layer;
 		gsl_vector* bias;
 		std::function<double(double)> activation_fn;
 
-		GSLLayer(
+		Layer(
 			gsl_matrix* layer, 
 			gsl_vector* bias, 
 			std::function<double(double)> activation

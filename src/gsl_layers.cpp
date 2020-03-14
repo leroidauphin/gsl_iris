@@ -8,7 +8,12 @@
 
 #include <iostream>
 
-GSLLayer GSLLayer::make_layer(size_t n_nodes, size_t node_size, Initialiser& initialiser, std::function<double(double)> activation_fn){
+Layer<gsl_vector*> Layer<gsl_vector*>::make_layer(
+	size_t n_nodes, 
+	size_t node_size, 
+	Initialiser& initialiser, 
+	std::function<double(double)> activation_fn
+	){
 	auto matrix(gsl_matrix_alloc(n_nodes, node_size));
 	for (size_t i = 0; i < n_nodes; i++){
 		for (size_t j = 0; j < node_size; j++) {
@@ -16,18 +21,18 @@ GSLLayer GSLLayer::make_layer(size_t n_nodes, size_t node_size, Initialiser& ini
 		}
 	}
 	auto vector(gsl_vector_calloc(n_nodes));
-	auto gsl_layer = GSLLayer(matrix, vector, activation_fn);
+	auto gsl_layer = Layer<gsl_vector*>(matrix, vector, activation_fn);
 	return gsl_layer;
 }
 
 
-GSLLayer::~GSLLayer() {
+Layer<gsl_vector*>::~Layer<gsl_vector*>() {
 	gsl_matrix_free(layer);
 	gsl_vector_free(bias);
 }
 
 
-GSLVariables GSLLayer::apply(GSLVariables input) {
+Variables<gsl_vector*> Layer<gsl_vector*>::apply(Variables<gsl_vector*> input) {
 	auto input_values = input.get_values();
 	size_t n_nodes = input_values->size;
 	auto target_vector(gsl_vector_alloc(n_nodes));
@@ -43,7 +48,7 @@ GSLVariables GSLLayer::apply(GSLVariables input) {
 
 	gsl_vector_free(input_values);
 
-	auto output_values = GSLVariables(target_vector);
+	auto output_values = Variables<gsl_vector*>(target_vector);
 
 	return output_values;
 }

@@ -10,14 +10,26 @@
 #include <cstddef>
 #include <memory>
 
-class GSLVariables: public Variables<gsl_vector*> {
+template <>
+class Variables<gsl_vector*> {
 
 	public:
-		static GSLVariables make_variables(size_t n_values, Initialiser& initialiser);
+		static Variables<gsl_vector*> make_variables(
+			size_t n_values, Initialiser& initialiser
+		){
+			auto vector(gsl_vector_alloc(n_values));
+			for (size_t i = 0; i < n_values; i++){
+				gsl_vector_set(vector, i, initialiser.get_value());
+			}
+			auto variables = Variables<gsl_vector*>(vector);
+			return variables;
+		}
 
-		gsl_vector * get_values();
+		gsl_vector * get_values() {
+			return values;
+		}
 
-		GSLVariables(gsl_vector* values): values(values)
+		Variables(gsl_vector* values): values(values)
 		{}
 	private:
 		gsl_vector* values;

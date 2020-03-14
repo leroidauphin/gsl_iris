@@ -7,7 +7,6 @@
 template <class T>
 class Variables {
 	public:
-
 		T get_values();
 };
 
