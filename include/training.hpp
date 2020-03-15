@@ -12,7 +12,7 @@ class Cost {
         virtual double compute_cost(
             std::shared_ptr<Variables<T>> predictions,
             std::shared_ptr<Variables<T>> targets
-        );
+        ) = 0;
 };
 
 
